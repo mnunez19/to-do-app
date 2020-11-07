@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tasks</title>
+    <!-- skeleton css CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" />
+    <!-- fontawesome CDN -->
+    <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" rel="stylesheet">
+  </head>
+  <style>
+
+    header{
+      margin-top: 20px;
+    }
+
+    .task{
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: gray;
+      background: rgba(247, 247, 247, 0.315);
+      padding: 5px 10px;
+      text-transform: capitalize;
+    }
+
+    .task:hover{
+      background-color: rgba(121, 195, 255, 0.233);
+      border-radius: 3px;
+    }
+    .delete_icon:hover{
+      color: red;
+      border-radius: 5px;
+      background-color: rgb(240, 240, 240);
+    }
+    .task_done{
+      text-decoration-line: line-through;
+    }
+
+
+
+
+
+
+
+
+  </style>
+
+<body>
+<div class="container">
+  <header>
+    <h1>My Tasks Application</h1>
+  </header>
+  <main>
+    <!-- today -->
+    <h4>Today</h4><hr>
+    <ul>
+      <li class="task">Walk the dog<span class="delete_icon far fa-trash-alt"></span></li>
+      <li class="task task_done">pay rent<span class="delete_icon far fa-trash-alt"></span></li>
+      <li class="task">buy plane tickes<span class="delete_icon far fa-trash-alt"></span></li>
+    </ul>
+    <!-- tomorrow -->
+    <h4>Tomorrow</h4><hr>
+    <ul>
+      <li class="task">change car oil<span class="delete_icon far fa-trash-alt"></span></li>
+      <li class="task">buy phone case<span class="delete_icon far fa-trash-alt"></span></li>
+    </ul>
+    <!-- upcoming -->
+    <h4>Upcoming</h4><hr>
+    <ul>
+      <li class="task">Pay credict card<span class="delete_icon far fa-trash-alt"></span></li>
+    </ul><hr>
+    <!-- buttons set -->
+    <div>
+      <button><i class="fas fa-check-circle"></i></button>
+      <button><i class="far fa-calendar-minus"></i></button>
+      <button><i class="far fa-trash-alt"></i></button>
+    </div>
+
+    <form>
+      <input type="text" placeholder="I want to ...">
+      <button class="button-primary">+ Add</button>
+    </form>
+
+  </main>
+</div><!-- container -->
+
+<script>
+
+
+</script>
+</body>
+</html>
