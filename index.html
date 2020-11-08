@@ -14,7 +14,6 @@
     header{
       margin-top: 20px;
     }
-
     .task{
       list-style: none;
       display: flex;
@@ -25,7 +24,6 @@
       padding: 5px 10px;
       text-transform: capitalize;
     }
-
     .task:hover{
       background-color: rgba(121, 195, 255, 0.233);
       border-radius: 3px;
@@ -38,58 +36,97 @@
     .task_done{
       text-decoration-line: line-through;
     }
-
-
-
-
-
-
-
-
+    .task_btns_wrapper i{
+    padding: 0 10px;      
+    }
+    h4{
+      color: rgb(85, 85, 85);
+    }
+    .active {
+      pointer-events: none;
+      font-size: 2rem;
+      background-color:#fff;
+      -moz-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+    }
   </style>
-
 <body>
 <div class="container">
   <header>
-    <h1>My Tasks Application</h1>
+    <h1>To-do List App</h1>
   </header>
   <main>
     <!-- today -->
-    <h4>Today</h4><hr>
-    <ul>
-      <li class="task">Walk the dog<span class="delete_icon far fa-trash-alt"></span></li>
-      <li class="task task_done">pay rent<span class="delete_icon far fa-trash-alt"></span></li>
-      <li class="task">buy plane tickes<span class="delete_icon far fa-trash-alt"></span></li>
+    <!-- <h4>Your tasks</h4> -->
+    <hr>
+    <ul class="task_container">
+      <li class="task active">Add Your tasks ...</li>
     </ul>
-    <!-- tomorrow -->
-    <h4>Tomorrow</h4><hr>
-    <ul>
-      <li class="task">change car oil<span class="delete_icon far fa-trash-alt"></span></li>
-      <li class="task">buy phone case<span class="delete_icon far fa-trash-alt"></span></li>
-    </ul>
-    <!-- upcoming -->
-    <h4>Upcoming</h4><hr>
-    <ul>
-      <li class="task">Pay credict card<span class="delete_icon far fa-trash-alt"></span></li>
-    </ul><hr>
+    <hr> 
     <!-- buttons set -->
     <div>
       <button><i class="fas fa-check-circle"></i></button>
-      <button><i class="far fa-calendar-minus"></i></button>
-      <button><i class="far fa-trash-alt"></i></button>
+      <button><i class="fas fa-download"></i></button>
+      <button><i class="delete_btn far fa-trash-alt"></i></button>
     </div>
-
     <form>
-      <input type="text" placeholder="I want to ...">
-      <button class="button-primary">+ Add</button>
+      <input class="my_text" name="task" for="task" type="text" placeholder="I want to ..." required>
+      <input class="submit_btn button-primary" type="submit" value="add task ">
     </form>
-
   </main>
 </div><!-- container -->
 
 <script>
+  //variable declaration
+  const myText = document.querySelector('.my_text');
+  const submitBtn = document.querySelector('.submit_btn');
+  const taskContaner = document.querySelector('.task_container');
+  let elemLi;
 
+//add li task to DOM
+  function addingtask(e){
+    if( myText.value == '' ){
+      alert('your input field is empty');
+    }else{      
+      removeCallToAction()//remove call to action
+      taskContaner.innerHTML += `<li class="task">${myText.value}
+        <span class="task_btns_wrapper">
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-download"></i>
+          <i class="delete_icon far fa-trash-alt"></i>          
+        </span></li>`;
+      myText.value = '';//reset input
+    }
+    e.preventDefault();
+  }
+  //Remove li task form DOM
+  function delElement(e) {
+    if(e.target.classList.contains('delete_icon')){
+      e.target.parentElement.parentElement.remove();//delete element
+      addCallToAction();//add call to action
+    }
+  }
+  //add call to action element 
+  function addCallToAction(){
+    if(taskContaner.childElementCount == 0){
+      elemLi = document.createElement('li');
+      elemLi.classList = ('task active');
+      elemLi.innerText = `Add Your tasks ...`;
+      taskContaner.append(elemLi)
+    }
+  }
+  //remove call to action element
+  function removeCallToAction(){
+    if(taskContaner.children[0].classList.contains('active')){
+      taskContaner.children[0].remove();
+    }
+  }
+  //events
+  submitBtn.addEventListener('click', addingtask);
+  taskContaner.addEventListener('click', delElement)
 
 </script>
+
 </body>
 </html>
