@@ -33,9 +33,7 @@
       border-radius: 5px;
       background-color: rgb(240, 240, 240);
     }
-    .task_done{
-      text-decoration-line: line-through;
-    }
+
     .task_btns_wrapper i{
     padding: 0 10px;      
     }
@@ -50,6 +48,27 @@
       -khtml-user-select: none;
       -webkit-user-select: none;
     }
+    .check_icon:hover{
+      color: #33C3F0;
+    }
+
+    .check_tasks{
+      position: relative;
+      color: rgb(199, 199, 199);
+    }
+    .check_tasks::after{
+      content: '';
+      display: inline-block;
+      position:absolute;
+      width: 95%;
+      height: 2px;
+      left: 2.5%;
+      top: 15px;
+      opacity: .5;
+      background-color: rgb(141, 141, 141);
+    }
+
+
   </style>
 <body>
 <div class="container">
@@ -63,6 +82,7 @@
     <ul class="task_container">
       <li class="task active">Add Your tasks ...</li>
     </ul>
+    <ul class="completed_tasks"></ul>
     <hr> 
     <!-- buttons set -->
     <div>
@@ -80,9 +100,9 @@
 <script>
   //variable declaration
   const myText = document.querySelector('.my_text');
-  const submitBtn = document.querySelector('.submit_btn');
+  // const submitBtn = document.querySelector('.submit_btn');
   const taskContaner = document.querySelector('.task_container');
-  let elemLi;
+  // let elemLi;
 
 //add li task to DOM
   function addingtask(e){
@@ -92,8 +112,8 @@
       removeCallToAction()//remove call to action
       taskContaner.innerHTML += `<li class="task">${myText.value}
         <span class="task_btns_wrapper">
-          <i class="fas fa-check-circle"></i>
-          <i class="fas fa-download"></i>
+          <i class="check_icon fas fa-check-circle"></i>
+          <i class="achive_btn fas fa-download"></i>
           <i class="delete_icon far fa-trash-alt"></i>          
         </span></li>`;
       myText.value = '';//reset input
@@ -110,7 +130,7 @@
   //add call to action element 
   function addCallToAction(){
     if(taskContaner.childElementCount == 0){
-      elemLi = document.createElement('li');
+      let elemLi = document.createElement('li');
       elemLi.classList = ('task active');
       elemLi.innerText = `Add Your tasks ...`;
       taskContaner.append(elemLi)
@@ -122,11 +142,19 @@
       taskContaner.children[0].remove();
     }
   }
+
+function checkTask(e){
+  if( e.target.classList.contains('check_icon')){
+    let taskCompleted = e.target.parentElement.parentElement;
+    document.querySelector('.completed_tasks').appendChild(taskCompleted);
+    taskCompleted.classList.add('check_tasks')
+  }
+}
   //events
-  submitBtn.addEventListener('click', addingtask);
-  taskContaner.addEventListener('click', delElement)
+  document.querySelector('.submit_btn').addEventListener('click', addingtask);
+  document.querySelector('main').addEventListener('click', delElement);
+  document.querySelector('main').addEventListener('click', checkTask);
 
 </script>
-
 </body>
 </html>
