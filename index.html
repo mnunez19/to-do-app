@@ -83,6 +83,7 @@
       <li class="task active">Add Your tasks ...</li>
     </ul>
     <ul class="completed_tasks"></ul>
+    <ul class="achived"></ul>
     <hr> 
     <!-- buttons set -->
     <div>
@@ -100,11 +101,9 @@
 <script>
   //variable declaration
   const myText = document.querySelector('.my_text');
-  // const submitBtn = document.querySelector('.submit_btn');
   const taskContaner = document.querySelector('.task_container');
-  // let elemLi;
 
-//add li task to DOM
+  //add li task to DOM
   function addingtask(e){
     if( myText.value == '' ){
       alert('your input field is empty');
@@ -142,19 +141,19 @@
       taskContaner.children[0].remove();
     }
   }
-
-function checkTask(e){
-  if( e.target.classList.contains('check_icon')){
-    let taskCompleted = e.target.parentElement.parentElement;
-    document.querySelector('.completed_tasks').appendChild(taskCompleted);
-    taskCompleted.classList.add('check_tasks')
+  //complete task
+  function checkTask(e){
+    if( e.target.classList.contains('check_icon')){
+      let taskCompleted = e.target.parentElement.parentElement;
+      document.querySelector('.completed_tasks').appendChild(taskCompleted);
+      taskCompleted.classList.add('check_tasks');
+      addCallToAction();
+    }
   }
-}
   //events
   document.querySelector('.submit_btn').addEventListener('click', addingtask);
   document.querySelector('main').addEventListener('click', delElement);
   document.querySelector('main').addEventListener('click', checkTask);
-
 </script>
 </body>
 </html>
