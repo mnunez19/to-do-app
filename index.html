@@ -83,13 +83,14 @@
       <li class="task active">Add Your tasks ...</li>
     </ul>
     <ul class="completed_tasks"></ul>
-    <ul class="achived"></ul>
+    <ul class="achived_task"></ul>
+    <ul class="deleted_task"></ul>
     <hr> 
     <!-- buttons set -->
     <div>
-      <button><i class="fas fa-check-circle"></i></button>
-      <button><i class="fas fa-download"></i></button>
-      <button><i class="delete_btn far fa-trash-alt"></i></button>
+      <button class="completed"><i class="fas fa-check-circle"></i></button>
+      <button class="achived"><i class="fas fa-download"></i></button>
+      <button class="deleted"><i class="far fa-trash-alt"></i></button>
     </div>
     <form>
       <input class="my_text" name="task" for="task" type="text" placeholder="I want to ..." required>
@@ -99,10 +100,10 @@
 </div><!-- container -->
 
 <script>
-  //variable declaration
+  //VARIABLES
   const myText = document.querySelector('.my_text');
   const taskContaner = document.querySelector('.task_container');
-
+  //FUNCTIONS
   //add li task to DOM
   function addingtask(e){
     if( myText.value == '' ){
@@ -119,7 +120,7 @@
     }
     e.preventDefault();
   }
-  //Remove li task form DOM
+  //Remove li task form DOM 
   function delElement(e) {
     if(e.target.classList.contains('delete_icon')){
       e.target.parentElement.parentElement.remove();//delete element
@@ -141,7 +142,7 @@
       taskContaner.children[0].remove();
     }
   }
-  //complete task
+
   function checkTask(e){
     if( e.target.classList.contains('check_icon')){
       let taskCompleted = e.target.parentElement.parentElement;
@@ -150,10 +151,30 @@
       addCallToAction();
     }
   }
-  //events
+
+  function uiController(e){
+    //UI set of buttons
+    if(e.target.classList.contains('completed')){
+      //pedning
+    } else if(e.target.classList.contains('achived')){
+      //pedning
+    }else if(e.target.classList.contains('deleted')){
+      //pedning
+    }
+    // JS dynamic elements
+    if(e.target.classList.contains('check_icon')){
+      checkTask(e)
+    } else if(e.target.classList.contains('achive_btn')){
+      checkTask(e);
+    }else if(e.target.classList.contains('delete_icon')){
+      delElement(e);
+    }
+  }
+  //EVENTS
   document.querySelector('.submit_btn').addEventListener('click', addingtask);
-  document.querySelector('main').addEventListener('click', delElement);
-  document.querySelector('main').addEventListener('click', checkTask);
+  document.querySelector('main').addEventListener('click', uiController)
+
+
 </script>
 </body>
 </html>
