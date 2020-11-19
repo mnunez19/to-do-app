@@ -67,6 +67,9 @@
       opacity: .5;
       background-color: rgb(141, 141, 141);
     }
+    .archive{
+      color: rgb(112, 146, 197) !important;
+    }
 
 
   </style>
@@ -82,8 +85,8 @@
     <ul class="task_container">
       <li class="task active">Add Your tasks ...</li>
     </ul>
+    <ul class="archive_task"></ul>
     <ul class="completed_tasks"></ul>
-    <ul class="achived_task"></ul>
     <ul class="deleted_task"></ul>
     <hr> 
     <!-- buttons set -->
@@ -113,7 +116,7 @@
       taskContaner.innerHTML += `<li class="task">${myText.value}
         <span class="task_btns_wrapper">
           <i class="check_icon fas fa-check-circle"></i>
-          <i class="achive_btn fas fa-download"></i>
+          <i class="archive_btn fas fa-download"></i>
           <i class="delete_icon far fa-trash-alt"></i>          
         </span></li>`;
       myText.value = '';//reset input
@@ -142,16 +145,22 @@
       taskContaner.children[0].remove();
     }
   }
-
   function checkTask(e){
-    if( e.target.classList.contains('check_icon')){
-      let taskCompleted = e.target.parentElement.parentElement;
-      document.querySelector('.completed_tasks').appendChild(taskCompleted);
-      taskCompleted.classList.add('check_tasks');
-      addCallToAction();
-    }
+    let taskCompleted = e.target.parentElement.parentElement;
+    document.querySelector('.completed_tasks').appendChild(taskCompleted);
+    taskCompleted.classList.add('check_tasks');
+    addCallToAction();
   }
+  function archiveTask(e){
+    let archiveTask = e.target.parentElement.parentElement;
+    document.querySelector('.archive_task').appendChild(archiveTask);
+    archiveTask.classList.add('archive');
 
+    archiveTask.children[0].children[1].classList.add('fa-plus');
+    archiveTask.children[0].children[1].classList.remove('fa-download');
+    archiveTask.children[0].children[0].remove();
+    addCallToAction();
+  }
   function uiController(e){
     //UI set of buttons
     if(e.target.classList.contains('completed')){
@@ -163,9 +172,9 @@
     }
     // JS dynamic elements
     if(e.target.classList.contains('check_icon')){
-      checkTask(e)
-    } else if(e.target.classList.contains('achive_btn')){
       checkTask(e);
+    } else if(e.target.classList.contains('archive_btn')){
+      archiveTask(e);
     }else if(e.target.classList.contains('delete_icon')){
       delElement(e);
     }
@@ -173,8 +182,6 @@
   //EVENTS
   document.querySelector('.submit_btn').addEventListener('click', addingtask);
   document.querySelector('main').addEventListener('click', uiController)
-
-
 </script>
 </body>
 </html>
